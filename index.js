@@ -50,24 +50,35 @@ const zooAnimals = [
   /* 🦁🦁🦁 Request 1: .forEach() 🦁🦁🦁
   The zoos want to display both the scientific name and the animal name in front of the habitats. Populate the displayNames array with only the animal_name and scientific_name of each animal. displayNames will be an array of strings, and each string should follow this pattern: "Name: Jackal, asiatic, Scientific: Canis aureus."
   */
-  function animalNames(animals){
-
+  function animalNames(data){
+    const displayNames = [];
+    zooAnimals.forEach(function(item){
+      displayNames.push("name: " + item.animal_name + "," + " scientific: " + item.scientific_name);
+    })
+    return displayNames;
   }
-  
-
+  animalNames(zooAnimals)
   /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
   The zoos need a list of all their animal's names (animal_name only) converted to lower case. Using map, create a new array of strings named lowCaseAnimalNames, each string following this pattern: "jackal, asiatic". Log the resut.
   */
-  function lowerCaseNames(animals){
-
+  function lowerCaseNames(lowerCase){
+    lowerCase = [];
+    zooAnimals.forEach(function(data){
+      lowerCase.push(data.animal_name.toLowerCase());
+    })
+    return lowerCase;
   }
   
   
   /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
   The zoos are concerned about animals with a lower population count. Using filter, create a new array of objects called lowPopulationAnimals which contains only the animals with a population less than 5.
   */
-  function lowPopulationAnimals(/*Your Code Here*/){
-    /*Your Code Here*/
+  function lowPopulationAnimals(data){
+    const lowPop = [];
+    if (zooAnimals.population > 5){
+      lowPop.push(data["population"]);
+    }
+    return data;
   }
   
 
@@ -124,26 +135,33 @@ const zooAnimals = [
 
 // 🐴🐴🐴 Topic 3: Prototypes 🐴🐴🐴 //
 //🐴🐴🐴 Task: You are to build a cuboid maker that can return values for a cuboid's volume or surface area. Cuboids are similar to cubes but do not have even sides. Follow the steps in order to accomplish this challenge. 🐴🐴🐴
+
 /* 🐴🐴🐴 Step 1: Base Constructor 🐴🐴🐴
   Create a constructor function named CuboidMaker that accepts properties for length, width, and height which can be initialized as an object
 */
-function CuboidMaker(length, width, height){
-  this.length = length;
-  this.width = width;
-  this.height = height;
+function CuboidMaker(attributes){
+  this.length = attributes.length;
+  this.width = attributes.width;
+  this.height = attributes.height;
 }
 
 /* 🐴🐴🐴 Step 2: Volume Method 🐴🐴🐴
   Create a method using CuboidMaker's prototype that returns the volume of a given cuboid's length, width, and height
   Formula for cuboid volume: length * width * height   */
 
-
+CuboidMaker.prototype.volume = function(){
+  const vol = this.length * this.width * this.height;
+  return vol;
+}
 
 /* 🐴🐴🐴 Step 3: Surface Area Method 🐴🐴🐴
   Create another method using CuboidMaker's prototype that returns the surface area of a given cuboid's length, width, and height. 
   Formula for cuboid surface area of a cube: 
   2 * (length * width + length * height + width * height)  */
-
+CuboidMaker.prototype.surfaceArea = function(){
+  const surfArea = 2 * (this.length * this.width + this.length * this.height + this.width * this.height);
+  return surfArea;
+}
 
 
 
@@ -169,6 +187,16 @@ class CuboidMakerTwo{
     this.length = attributes.length;
     this.width = attributes.width;
     this.height = attributes.height;
+  }
+
+  volume(){
+    const vol = this.length * this.width * this.height;
+  return vol;
+  }
+
+  surfaceArea(){
+    const surfArea = 2 * (this.length * this.width + this.length * this.height + this.width * this.height);
+    return surfArea;
   }
 }
 
